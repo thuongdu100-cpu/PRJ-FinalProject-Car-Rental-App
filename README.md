@@ -14,10 +14,10 @@
 - Các trang **JSP** nằm trong thư mục `web/`, hiển thị giao diện người dùng.  
 - Sử dụng **JSTL** để truy xuất dữ liệu và **Bootstrap** để tạo giao diện thân thiện.  
 - Có các trang chính:
-  - `index.jsp`: Trang chủ cho Guest
-  - `user_home.jsp`: Trang chính của User
-  - `admin_dashboard.jsp`: Trang quản trị
-  - `login.jsp`, `register.jsp`, `car_list.jsp`, `chat.jsp`, ...
+  - `home.jsp`: Trang chủ cho Guest
+  - `.jsp`: Trang xe đã đặt của User
+  - `adminHome.jsp`: Trang quản trị
+  - `login.jsp`, `register.jsp`: đăng nhập đăng ký 
 
 ### 🔹 **Filter**
 - Thực hiện phân quyền giữa **User**, **Admin** và **Guest**.
