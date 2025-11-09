@@ -20,6 +20,7 @@
             width: 300px;
             border-radius: 8px;
             box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            position: relative;
         }
         .btn {
             background: #007bff;
@@ -34,15 +35,42 @@
             background: #ccc;
             cursor: not-allowed;
         }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            z-index: 100;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: black;
+        }
+        .dropdown-menu a:hover {
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Danh sách xe</h2>
+
+    <c:if test="${sessionScope.role == 'admin'}">
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a href="adminCarServlet?action=add" class="btn">THÊM XE</a>
+        </div>
+    </c:if>
+
     <c:if test="${empty cars}">
         <p>Không có xe nào trong hệ thống.</p>
     </c:if>
+
     <div class="grid">
         <c:forEach var="car" items="${cars}">
             <div class="car-card">
@@ -56,14 +84,15 @@
                     </c:choose>
                 </p>
 
+                <!-- Quyền đặt xe -->
                 <c:choose>
-                    <c:when test="${role == 'guest'}">
+                    <c:when test="${sessionScope.role == null}">
                         <a href="login.jsp" class="btn">Đăng nhập để đặt xe</a>
                     </c:when>
-                    <c:when test="${role == 'user'}">
+                    <c:when test="${sessionScope.role == 'user'}">
                         <c:choose>
                             <c:when test="${car.available}">
-                                <form action="booking" method="post">
+                                <form action="bookingServlet" method="post">
                                     <input type="hidden" name="carId" value="${car.id}" />
                                     <button type="submit" class="btn">Đặt xe</button>
                                 </form>
@@ -74,10 +103,36 @@
                         </c:choose>
                     </c:when>
                 </c:choose>
+
+                <!-- Quyền admin -->
+                <c:if test="${sessionScope.role == 'admin'}">
+                    <div style="position: absolute; top: 10px; right: 10px;">
+                        <button class="btn" onclick="toggleMenu(this)">⋮</button>
+                        <div class="dropdown-menu">
+                            <a href="adminCarServlet?action=edit&id=${car.id}">️ Sửa</a>
+                            <a href="adminCarServlet?action=delete&id=${car.id}" onclick="return confirm('Bạn có chắc muốn xóa xe này?')">️ Xóa</a>
+                        </div>
+                    </div>
+                </c:if>
             </div>
         </c:forEach>
     </div>
 </div>
+
+<script>
+    function toggleMenu(button) {
+        const menu = button.nextElementSibling;
+        const isVisible = menu.style.display === 'block';
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
+        menu.style.display = isVisible ? 'none' : 'block';
+    }
+
+    document.addEventListener('click', function(event) {
+        if (!event.target.matches('.btn')) {
+            document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
+        }
+    });
+</script>
 
 </body>
 </html>

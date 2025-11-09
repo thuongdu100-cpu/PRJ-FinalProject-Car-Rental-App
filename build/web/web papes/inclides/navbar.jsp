@@ -44,15 +44,15 @@
     <ul>
         <!-- Guest -->
         <c:if test="${sessionScope.user == null}">
-            <li><a href="${pageContext.request.contextPath}/questServlet">Trang chủ</a></li>
+            <li><a href="${pageContext.request.contextPath}/CarServlet">Trang chủ</a></li>
             <li><a href="${pageContext.request.contextPath}/login.jsp">Đăng nhập</a></li>
             <li><a href="${pageContext.request.contextPath}/register.jsp">Đăng ký</a></li>
         </c:if>
 
         <!-- User -->
         <c:if test="${sessionScope.role == 'user'}">
-            <li><a href="${pageContext.request.contextPath}/user/booking.jsp">Chuyến Đi</a></li>
-            <li><a href="${pageContext.request.contextPath}/home">Danh sách xe</a></li>
+            <li><a href="${pageContext.request.contextPath}/user/booking.jsp">Xe của bạn</a></li>
+            <li><a href="${pageContext.request.contextPath}/CarServlet">Trang Chủ</a></li>
             <li><a href="${pageContext.request.contextPath}/user/chat.jsp">Chat</a></li>
             <li><a href="${pageContext.request.contextPath}/logoutServlet">Đăng xuất</a></li>
         </c:if>
