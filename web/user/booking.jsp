@@ -5,7 +5,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../inclides/navbar.jsp" %>
+<%@ include file="/web papes/inclides/navbar.jsp" %>
 
 <html>
 <head>
@@ -24,6 +24,25 @@
         }
         .car-card h3 { margin: 0 0 10px; }
         .car-card p { margin: 5px 0; }
+        .status {
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .status.pending { background: #ffc107; color: #333; }
+        .status.confirmed { background: #28a745; color: white; }
+        .status.cancelled { background: #dc3545; color: white; }
+        .btn-cancel {
+            background: #dc3545;
+            color: white;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-cancel:hover { background: #c82333; }
     </style>
 </head>
 <body>
@@ -40,11 +59,28 @@
             <p>Hãng: ${booking.car.brand}</p>
             <p>Giá thuê: ${booking.car.pricePerDay} VNĐ/ngày</p>
             <p>Ngày đặt: ${booking.bookingDate}</p>
-            <p>Trạng thái: ${booking.status}</p>
+            <p>Trạng thái: 
+                <span class="status 
+                    <c:choose>
+                        <c:when test="${booking.status == 'Đang chờ'}">pending</c:when>
+                        <c:when test="${booking.status == 'Đã xác nhận'}">confirmed</c:when>
+                        <c:otherwise>cancelled</c:otherwise>
+                    </c:choose>">
+                    ${booking.status}
+                </span>
+            </p>
+
+            <c:if test="${booking.status == 'Đang chờ' || booking.status == 'Đã xác nhận'}">
+                <form action="cancelBooking" method="post" onsubmit="return confirm('Bạn có chắc muốn hủy đặt xe này?')">
+                    <input type="hidden" name="bookingId" value="${booking.id}" />
+                    <button type="submit" class="btn-cancel">❌ Hủy đặt xe</button>
+                </form>
+            </c:if>
         </div>
     </c:forEach>
 </div>
 </body>
 </html>
+
 
 

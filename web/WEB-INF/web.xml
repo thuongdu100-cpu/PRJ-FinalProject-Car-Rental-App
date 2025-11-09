@@ -33,13 +33,14 @@
   </servlet-mapping>
 
   <servlet>
-      <servlet-name>AdminCarServlet</servlet-name>
-      <servlet-class>controller.AdminCarServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>AdminCarServlet</servlet-name>
-      <url-pattern>/admin/car</url-pattern>
-  </servlet-mapping>
+    <servlet-name>AdminCarServlet</servlet-name>
+    <servlet-class>controller.AdminCarServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>AdminCarServlet</servlet-name>
+    <url-pattern>/adminCarServlet</url-pattern>
+</servlet-mapping>
 
   <servlet>
       <servlet-name>BookingServlet</servlet-name>
@@ -47,7 +48,7 @@
   </servlet>
   <servlet-mapping>
       <servlet-name>BookingServlet</servlet-name>
-      <url-pattern>/booking</url-pattern>
+      <url-pattern>/bookingServlet</url-pattern>
   </servlet-mapping>
 
   <servlet>

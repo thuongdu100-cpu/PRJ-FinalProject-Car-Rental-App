@@ -23,7 +23,6 @@ import model.Car;
  */
 
 public class CarServlet extends HttpServlet {
-    private CarDAO dao = new CarDAO();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Car> cars = new CarDAO().getAllCars();

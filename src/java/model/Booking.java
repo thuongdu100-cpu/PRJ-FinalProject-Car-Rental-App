@@ -5,7 +5,7 @@
 package model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -21,14 +21,12 @@ public class Booking {
     private String username;
 
     @ManyToOne
-    @JoinColumn(name = "carId")
+    @JoinColumn(name = "carId", nullable = false)
     private Car car;
 
-    private LocalDate bookingDate;
+    private LocalDateTime bookingDate;
 
     private String status;
-
-    // Getters and setters
 
     public int getId() {
         return id;
@@ -54,11 +52,11 @@ public class Booking {
         this.car = car;
     }
 
-    public LocalDate getBookingDate() {
+    public LocalDateTime getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(LocalDate bookingDate) {
+    public void setBookingDate(LocalDateTime bookingDate) {
         this.bookingDate = bookingDate;
     }
 

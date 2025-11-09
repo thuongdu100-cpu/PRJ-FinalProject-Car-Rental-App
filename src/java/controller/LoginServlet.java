@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
             if ("admin".equals(user.getRole())) {
                 resp.sendRedirect("admin/adminHome.jsp");
             } else {
-                resp.sendRedirect("user/booking.jsp");
+                resp.sendRedirect("CarServlet");
             }
         } else {
             req.setAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
